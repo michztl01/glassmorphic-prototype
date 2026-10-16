@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
+    <title>Flat&Glass</title>
+</head>
+<body>
+    <header>
+        <nav>
+            <ul>
+                <li>Glass<span>Nav</span></li>
+                <li><a href="#hero">Hero</a></li>
+                <li><a href="#about">About</a></li>
+                <li><a href="#features">Features</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+        </nav>
+    </header>
+    <main>
+        <section id="hero">
+            <p>We want you to understand</p>
+            <h1>Flat&Glassmorphic Design</h1>
+            <!-- <p>Scroll down to see how the vibrant, solid colors and crisp geometric shapes interact with the frosted glass menu at the top.</p> -->
+            <p>Scroll down to explore the flat page that contains vibrant, solid colors and crisp geometric shapes.</p>
+            <!-- <img width="752" height="500" src="assets/graduation-sailors.jpg" alt="sailors at graduation, throwing their hats in air"> -->
+            <a href="#about">Start your adventure</a>
+        </section>
+        <section id="about">
+            <h2>Vibrant Components</h2>
+            <div class="cards-container">
+                <div class="card">
+                    <div class="shape circle"></div>
+                    <h3>High Contrast</h3>
+                    <p>Testing the blur effect is best done with stark, contrasting colors. Watch as the blue circle vanishes into the frosted glass.</p>
+                </div>
+                <div class="card">
+                    <div class="shape rhombus"></div>
+                    <h3>Sharp Edges</h3>
+                    <p>Flat design relies on sharp edges and distinct boundaries, making it the perfect foil for blurred, soft UI elements.</p>
+                </div>
+                <div class="card">
+                    <div class="shape cirle-with-sharp-angle"></div>
+                    <h3>Solid Typography</h3>
+                    <p>Heavy sans-serif fonts remain readable even when passing behind the translucent navigation overlay.</p>
+                </div>
+            </div>
+        </section>
+        <section id="features">
+            <div class="grid">
+                <div class="first-column">
+                    <h2>No Gradients. <br> No shadows.</h2>
+                    <p>This layout adheres entirely to the flat design paradigm. 
+                        Illustrations like those on the right strengthen the visual impact of flat design.
+                        Elements rely on solid colors, crisp typography, and generous negative space to establish visual hierarchy.
+                        By removing gradients and drop shadows from the content layer, the complex, transparent blur of the glassmorphic 
+                        navigation bar stands out in striking contrast as it passes over the edges of these shapes.
+                    </p>
+                </div>
+                <div class="second-column">
+                    <img width="300" height="200" src="assets/hand-drawn-nature-scene.webp" alt="hand drawn nature illustration" />
+                    <img width="300" height="200" src="assets/flowers-illustration.webp" alt="flowers illustration" />
+                    <img width="300" height="200" src="assets/peaceful-landscape.webp" alt="a calm and peaceful landscape" />
+                    <img width="300" height="200" src="assets/hokusai-style.webp" alt="waves in hokusai style" />
+                </div>
+            </div>
+            <div class="slant-graphic"></div>
+        </section>
+        <section id="contact">
+            <div class="form-container">
+                <h2>This is it.</h2>
+                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Iusto cumque repellendus quam eveniet voluptas, cupiditate autem amet, maiores omnis fugit provident doloremque reiciendis, repellat error.</p>
+                <p class="error"></p>
+                <form onsubmit="submitForm(event)">
+                    <div class='input-container ic1'>
+                        <!-- pattern="[A-Z]{2}[0-9A-Za-z]{6}" -->
+                        <input id="name" type="text" name="name" placeholder=" " />
+                        <label class='placeholder' for="name">
+                            Name
+                        </label>
+                    </div>
+
+                    <div class='input-container ic2'>
+                        <input id="surname" type="text" name="surname" placeholder=" "/>
+                        <label class='placeholder' for="surname">
+                            Surname
+                        </label>
+                    </div>
+
+                    
+                    <div class='input-container ic2'>
+                        <input id="email" type="text" name="email" placeholder=" "/>
+                        <label class='placeholder' for="email">
+                            Email
+                        </label>
+                    </div>
+
+                    <br />
+                    <button class="submit" type="submit">Submit Form</button>
+                    <br />
+                </form>
+            </div>
+        </section>
+    </main>
+    <footer>
+        <p>Strict Flat Design prototype by Mihail Diaconu.</p>
+    </footer>
+    <script>
+        function submitForm(event){
+            event.preventDefault()
+            const nameInput = document.getElementById("name")
+            const nameAndSurnameRegex = /^[a-zA-ZàèìòùÀÈÌÒÙáéíóúÁÉÍÓÚ]{2,12}$/;
+            const surnameInput = document.getElementById("surname")
+            const emailInput = document.getElementById("email")
+            const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/
+            const errorParagraph = document.querySelector(".error")
+            console.log("errorParagraph", errorParagraph)
+            if(!nameAndSurnameRegex.test(nameInput.value) || !(nameAndSurnameRegex.test(surnameInput.value))){
+                errorParagraph.textContent = "Please insert a name and surname with alphabetic characters and with a length from 2 to 12 characters"
+                errorParagraph.style.display = "block"
+                return
+            }
+            if(emailInput.value.length === 0){
+                errorParagraph.textContent = "Missing email(empty field)"
+                errorParagraph.style.display = "block"
+                return
+            }
+            if(!emailRegex.test(emailInput.value)){
+                errorParagraph.textContent = "Invalid email format. Missing \"@\""
+                errorParagraph.style.display = "block"
+                return
+            }
+            alert("Form submitted")
+            const inputs = document.querySelectorAll("form input")
+            inputs.forEach(input => {
+                input.value = ""
+            })
+            errorParagraph.textContent = ""
+            errorParagraph.style.display = "none"
+        }
+    </script>
+</body>
+</html>

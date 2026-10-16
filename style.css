@@ -1,0 +1,500 @@
+/* Use a more-intuitive box-sizing model */
+/* If you set box-sizing: border-box; on an element, 
+the padding and border are included in the calculation of the width and height 
+Plus box-sizing is a property that is not inheritable
+So it's useful to apply it to all elements with "*"
+*/
+*, *::before, *::after {
+  box-sizing: border-box;
+}
+
+/* Remove default margin */
+/* Margin and padding are not inheritable propeties
+    Basically this means that to set a margin for an element and all its
+    children we must use the "*" selector */
+*:not(dialog) {
+  margin: 0;
+}
+
+/* Enable keyword animations */
+@media (prefers-reduced-motion: no-preference) {
+  html {
+    interpolate-size: allow-keywords;
+    scroll-behavior: smooth;
+  }
+}
+
+body {
+  /* Add accessible line-height */
+  line-height: 1.5;
+   /* svh is for mobile and indicates the vertical space without the adress bar */
+  min-height: 100svh;
+}
+
+/* Improve media defaults */
+img, picture, video, canvas, svg {
+  display: block;
+  /* prevents overflow */
+  max-width: 100%;
+  /* preserve aspect ratio */
+  height: auto;
+}
+
+/* Inherit fonts for form controls to avoid weird 
+behavior in mobile devices from usage of small font
+sizes */
+input, button, textarea, select, fieldset {
+  font: inherit;
+}
+
+/* Avoid text overflows */
+p, h1, h2, h3, h4, h5, h6 {
+  overflow-wrap: break-word;
+} 
+
+/* this balance the words quantity for each line so the final 
+    line does not contain only few isolated words(orphans).
+    It's useful for short texts(from 2 to 4 lines)
+    This setting differs from pretty because it concentrates on
+    balancing the quantity of words without occupying all the line*/
+h1, h2, h3, h4, h5, h6 {
+  text-wrap: balance;
+}
+
+/* Improve line wrapping */
+p {
+    /* confortable line length that preserves readability */
+    max-width: 60ch;
+    /* this property also prevents orphans */
+    text-wrap: pretty;
+}
+
+/* eliminate ul padding applied by browser styles */
+/* ul default browser settings contain padding-left:40px */
+ul {
+  padding: 0;
+}
+
+
+@media (prefers-reduced-motion: reduce) {
+  /* the banner is useful just for development purpose*/
+  body::before {
+    content: "Preference: reduced motion active";
+    display: block;
+    background: #ffd;
+    padding: 1em;
+  }
+
+  * {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition: none !important;
+        transition-duration: 0.01ms !important;
+        scroll-behavior: auto !important;
+    }
+}
+
+:root {
+  /* flat color palette */
+  --blue-de-france: #2e86de;
+  --dark-grey-imperial: #222f3e;
+  --casandra-yellow: #feca57;
+  --amour-red: #ee5253;
+  --red-socialist: #931C1C;
+  --orange-liquid-lava: #F5730A;
+  --brick-red: #871400;
+  --dark-mountain-nature-green: #10ac84;
+
+/* @link https://utopia.fyi/type/calculator?c=320,16,1.067,1240,20,1.125,5,1,&s=0.75|0.5|0.25,1.5|2|3|4|6,s-l&g=s,l,xl,12 */
+  --step--1: clamp(0.7502rem, 0.7036rem + 0.2327vw, 0.884rem);
+  --step-0: clamp(1rem, 0.913rem + 0.4348vw, 1.25rem);
+  --step-1: clamp(1.333rem, 1.1819rem + 0.7557vw, 1.7675rem);
+  --step-2: clamp(1.7769rem, 1.5256rem + 1.2563vw, 2.4992rem);
+  --step-3: clamp(2.3686rem, 1.9633rem + 2.0267vw, 3.5339rem);
+  --step-4: clamp(3.1573rem, 2.5175rem + 3.1994vw, 4.997rem);
+  --step-5: clamp(4.2087rem, 3.215rem + 4.9687vw, 7.0657rem);
+}
+
+body{
+    font-family: 'Inter', sans-serif;
+    font-size: var(--step-0);
+    font-weight: 300;
+}
+
+:target, section {
+  scroll-margin-top: 100px;
+}
+
+
+/* shapes for decoration */
+.circle {
+    border-radius: 50%;
+}
+
+/* idea from https://css-tricks.com/snippets/css/css-triangle/ */
+.triangle {
+    width: 0;
+    height: 0;
+    border-left: 100px solid transparent;
+    border-right: 100px solid transparent;
+    border-bottom: 100px solid;
+}
+
+header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    top: 1rem;
+    left: 1rem;
+    right: 1rem;
+    z-index: 1000;
+    
+    /* glassmorphic effect */
+    backdrop-filter: blur(15px);
+    -webkit-backdrop-filter: blur(15px);
+    /* rounded, pillow shape borders */
+    border-radius: 500px;
+    border: 1px solid #f5f5f530;
+    background: rgba(255, 255, 255, 0.15);
+    /* background-image: linear-gradient(to bottom right, rgba(255,255,255,0.2), transparent); */
+    box-shadow: 
+    0 8px 32px rgba(0, 0, 0, 0.15),
+    inset 0 1px 0 rgba(255, 255, 255, 0.15),
+    inset 0 -1px 0 rgba(255, 255, 255, 0.1),
+    inset 0 0 30px 15px rgba(255,255,255, 0.2);
+    /*hide the glows created by the pseudo-elements  */
+    overflow: hidden;
+}
+
+header::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(255, 255, 255, 0.9),
+    transparent
+  );
+}
+
+header::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 45px;
+  height: 100%;
+  background: linear-gradient(
+    180deg,
+    rgba(255, 255, 255, 0.9),
+    transparent,
+    rgba(255, 255, 255, 0.3)
+  );
+  mask-image:
+  radial-gradient(67px at 70px 50%, transparent 66px, black 67px);
+}
+
+nav {
+    /* background-color: #f5f5f5; */
+    width: 100%;
+    height: 120px;
+}
+
+nav ul {
+    height: 100%;
+    list-style: none;
+    padding-inline: 30px;
+    display: flex;
+    align-items: center;
+    gap: 35px;
+
+    li:first-child {
+        margin-right: auto;
+        font-size: 1.5rem;
+        font-weight: 900;
+        span {
+            color: var(--amour-red);
+        }
+    }
+    a{text-decoration: none; color: initial;}
+
+    a[href="#hero"]:hover{
+      text-decoration: underline;
+      text-underline-offset: 10px;
+      color: var(--orange-liquid-lava);
+    }
+     a[href="#about"]:hover{
+      text-decoration: underline;
+      text-underline-offset: 10px;
+      color: hsl(from var(--casandra-yellow) h s 40%);
+    }
+     a[href="#features"]:hover{
+      text-decoration: underline;
+      text-underline-offset: 10px;
+      color: darkcyan;
+    }
+     a[href="#contact"]:hover{
+      text-decoration: underline;
+      text-underline-offset: 10px;
+      color: blue;
+    }
+}
+
+section{
+   min-height: 100svh;
+   h2{
+    padding-top: 6rem;
+    font-size: var(--step-3);
+    font-weight: 900;
+   }
+}
+
+section#hero {
+  /* background-image:
+    linear-gradient(to right, #0003, #0001 50%, transparent),
+    url("assets/graduation.jpg"); */
+  color: white;
+  background-image: url("assets/layered-peaks-haikei.svg");
+  /* background-size: 100rem 100rem; */
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center bottom;
+  width: 100%;
+  p, img, h1, a{
+    margin: auto;
+    padding-inline: 1.5rem;
+    text-align: center;
+    font-weight: 800;
+  }
+  h1{
+    font-size: var(--step-4);
+    font-weight: 900;
+  }
+
+  p:first-child{
+    padding-top: calc(2rem + 120px + 1.75rem);
+    font-size: var(--step-2);
+    font-weight: 500;
+  }
+  p:last-of-type {
+    font-size: var(--step-0);
+    font-weight: 300;
+  }
+  a{
+    text-decoration: none;
+    display: block;
+    width: max-content;
+    margin-top: 4rem;
+    height: 4rem;
+    line-height: 3;
+    border: none;
+    background-color: var(--dark-grey-imperial);
+    color: white;
+    cursor: pointer;
+  }
+  a:hover{
+    text-decoration: underline;
+    text-underline-position: below;
+    text-underline-offset: 10px;
+    background-color: hsl(from var(--dark-grey-imperial) h s 28%);
+  }
+}
+
+section#about{
+  background-color: var(--casandra-yellow);
+  display: grid;
+  grid-template-rows: 30% 70%;
+  h2{
+    color: var(--brick-red);
+    margin: auto;
+  }
+  .cards-container{
+    margin: auto;
+    display: flex;
+    gap: 2rem;
+    margin-inline: 3rem;
+    margin-top: 3rem;
+    margin-bottom: 10rem;
+  }
+  .card{
+    border: 4px solid var(--brick-red);
+    background-color: white;
+    color: var(--red-socialist);
+    padding: 1.5rem;
+    min-height: 380px;
+    p{
+      margin-block: 1rem;
+    }
+  }
+  .card:nth-of-type(2){
+    background-color: #931C1C;
+    color: wheat;
+  }
+  .card .shape{
+    width: 90px;
+    height: 90px;
+    margin-bottom: 1rem;
+  }
+  .card .shape.circle{
+    border-radius: 50%;
+    background-color: var(--blue-de-france);
+  }
+  .card .shape.rhombus{
+    display: inline-block;
+    position: relative;
+    background-color: hsl(from rgb(211, 7, 143) h 100% 80%);
+    transform: rotate(45deg);
+    width: 70px;
+    height: 70px;
+    margin: 20px;
+    margin-top: 0;
+  }
+  .card .shape.cirle-with-sharp-angle{
+    border-radius: 50%;
+    border-top-left-radius: 0;
+    background-color: var(--dark-mountain-nature-green);
+  }
+}
+
+.slant-graphic{
+  --lighter-mountain-green: hsl(from var(--dark-mountain-nature-green) h s 45%);
+  position: absolute;
+  z-index: 0;
+  inset: 0 -80%;
+  width: 200vw;
+  height: 100%;
+  background-image: linear-gradient(to bottom, transparent, transparent 30%, var(--lighter-mountain-green) 30%, var(--lighter-mountain-green) 70%, transparent 70%, transparent);
+  transform: skew(0deg, -5deg);
+}
+
+section#features{
+  display: flex;
+  align-items: stretch;
+  color: white;
+  overflow: clip;
+  width: 100%;
+  position: relative;
+  z-index: -1;
+  background-color: var(--dark-mountain-nature-green);
+  /* border-image: linear-gradient(160deg, transparent 0%, transparent 45%, lightgreen 45%, lightgreen 50%, transparent 50%, transparent 100%) fill 0 / 0 / 100vw; */
+  .grid {
+    position: relative;
+    z-index: 1;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-template-rows: 1fr;
+  }
+  .first-column{
+    padding-inline: 3rem;
+    p{padding-top: 1.5rem;}
+  }
+  .second-column{
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 1fr 1fr;
+    gap: 1.5rem;
+    padding-inline: 3rem;
+    > img{position: relative; width: 350px; height: 225px; object-fit: cover;}
+    > img:first-child{transform: translateY(25%);}
+    > img:nth-child(2){transform: translateY(35%);}
+    > img:nth-child(3){transform: translateY(-5%);}
+    > img:last-child{transform: translateY(5%);}
+  }
+}
+
+section#contact{
+  padding-block: 7rem;
+  border-top: 20px solid var(--dark-grey-imperial);
+  background-image: url("assets/blob-scatter-haikei.svg");
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center bottom;
+  display: grid;
+  place-content: center;
+  margin: auto;
+  h2{
+    padding-top: 0;
+    padding-bottom: 1rem;
+  }
+  .form-container{
+    border: 10px solid var(--dark-grey-imperial);
+    padding-block: 1.5rem;
+    padding-inline: 2rem;
+    background-color: white;
+    p{
+      font-weight: 600;
+    }
+    button.submit{
+      width: 100%;
+      height: 4.5rem;
+      color: white;
+      background-color: var(--dark-grey-imperial);
+      font-weight: 600;
+    }
+    button.submit:hover{
+      background-color: hsl(from var(--dark-grey-imperial) h s 28%);
+    }
+    .input-container {
+        position: relative;
+        width: 100%;
+        height: 55px;
+        input {
+            width: 100%;
+            padding: 10px;
+            border: 2px solid var(--dark-grey-imperial);
+            background-color: hsl(from var(--dark-mountain-nature-green) h s 98%);
+        }
+        input:focus-visible {
+            outline: 2px solid var(--dark-mountain-nature-green);
+        }
+    }
+
+    .ic1 {
+        margin-top: 40px;
+    }
+
+    .ic2 {
+        margin-top: 30px;
+    }
+
+    .placeholder {
+        position: absolute;
+        padding: 7px;
+        top: 14px;
+        left: 20px;
+        line-height: 15px;
+        /* border-radius: 10px; */
+        pointer-events: none;
+        color: hsl(from var(--dark-grey-imperial) h s 50%);
+        transform-origin: 0 50%;
+        transition: all 300ms;
+    }
+
+    input:focus-visible~.placeholder,
+    input:not(:placeholder-shown)~.placeholder {
+        color: white;
+        transform: translateY(-38px) translateX(-12px) scale(1.2);
+        background-color: var(--dark-mountain-nature-green);
+        font-size: var(--step--1);
+    }
+  }
+  .error{
+    color: red;
+    margin-block: 1rem;
+    display: none;
+  }
+}
+
+footer{
+  height: 120px;
+  background-color: var(--dark-grey-imperial);
+  display: grid;
+  place-content: center;
+  p{
+    color: white;
+  }
+}
